@@ -1,7 +1,7 @@
 # newReacctCompose
 sh script, which will create a new npm project with 2 environments
 
-how to use :
+
 To use this script, follow these steps:
 
 Download the create_react_compose_app.sh script.
