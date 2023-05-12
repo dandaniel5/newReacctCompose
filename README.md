@@ -1,5 +1,5 @@
 # newReactCompose
-sh script, which will create a new npm project with 2 environments
+sh script, which will create a new npm project with 2 environments (npx + compouse)
 
 
 To use this script, follow these steps:
