@@ -7,8 +7,34 @@ if [[ -z "${app_name// }" ]]; then
   app_name=${PWD##*/}
 fi
 
+# Prompt for package manager
+read -p "Enter the package manager you want to use (npm/yarn): " package_manager
+
+while [[ "$package_manager" != "npm" && "$package_manager" != "yarn" ]]; do
+  read -p "Invalid input. Enter the package manager you want to use (npm/yarn): " package_manager
+done
+
+# Prompt for language
+read -p "Enter the language you want to use (ts/js): " language
+
+while [[ "$language" != "ts" && "$language" != "js" ]]; do
+  read -p "Invalid input. Enter the language you want to use (ts/js): " language
+done
+
 # Create React app
-npx create-react-app "$app_name"
+if [ "$language" == "ts" ]; then
+  if [ "$package_manager" == "npm" ]; then
+    npx create-react-app "$app_name" --template typescript
+  else
+    yarn create react-app "$app_name" --template typescript
+  fi
+else
+  if [ "$package_manager" == "npm" ]; then
+    npx create-react-app "$app_name"
+  else
+    yarn create react-app "$app_name"
+  fi
+fi
 
 
 # Create Dockerfile
@@ -52,12 +78,18 @@ EOL
 cat > start.sh << EOL
 #!/bin/ash
 
-npm install
-npm run build
-npm start
+if [ "$package_manager" == "npm" ]; then
+  npm install
+  npm run build
+  npm start
+else
+  yarn install
+  yarn build
+  yarn start
+fi
 EOL
 
 chmod +x start.sh
 
-echo "React app '$app_name' created successfully!"
-echo "To start the app, run 'docker-compose up -it'
+echo "React app '$app_name' created successfully with $package_manager and $language!"
+echo "To start the app, run 'docker-compose up'"
