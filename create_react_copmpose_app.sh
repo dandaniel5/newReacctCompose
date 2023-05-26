@@ -112,19 +112,19 @@ services:
 EOL
 
 # Create reactStart.sh script
-cat > reactStart.sh << EOL
-#!/bin/ash
+react_start_script="#!/bin/ash\n\n"
 
 if [ "$package_manager" == "npm" ]; then
-  npm install
-  npm run build
-  npm start
+  react_start_script+="npm install\n"
+  react_start_script+="npm run build\n"
+  react_start_script+="npm start\n"
 else
-  yarn install
-  yarn build
-  yarn start
+  react_start_script+="yarn install\n"
+  react_start_script+="yarn build\n"
+  react_start_script+="yarn start\n"
 fi
-EOL
+
+echo -e "$react_start_script" > reactStart.sh
 
 chmod +x reactStart.sh
 
