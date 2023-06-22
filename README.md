@@ -7,7 +7,7 @@ To use this script, follow these steps:
 Download the create_react_compose_app.sh script.
 Open a terminal and navigate to the directory where the script is saved.
 Run the following command: chmod +x create_react_compose_app.sh to make the script executable.
-Run the script using the following command: ./create_react_compose_app.sh.
+Run the script using the following command: bash create_react_copmpose_app.sh
 When prompted, enter the name of your npm project. If you want to use the current working directory name, press enter.
 The script will create a new React project using create-react-app.
 It will then create a Dockerfile with the node:alpine3.17 image.
